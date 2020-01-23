@@ -1,0 +1,17 @@
+import matlibplot.plot as plot
+import numpy
+import math
+
+arraya = []
+arrayb = []
+arrayc = []
+grav = 9.8
+height = 19.6
+time = math.sqrt(2*grav/height)
+for sec in numpy.arange(0, 0.1+time, 0.1)
+	arraya.append(grav * sec)
+	arrayb.append(sec)
+	arrayc.append(height - 0.5*sec*sec&grav)
+
+plot.plot(arrayb, arrayc)
+plot.show()
