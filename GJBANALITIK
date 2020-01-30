@@ -1,17 +1,53 @@
-import matlibplot.plot as plot
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Jan 23 09:16:21 2020
+
+@author: ASUS
+"""
 import numpy
 import math
+import matplotlib.pyplot as plot
 
-arraya = []
-arrayb = []
-arrayc = []
-grav = 9.8
-height = 19.6
-time = math.sqrt(2*grav/height)
-for sec in numpy.arange(0, 0.1+time, 0.1)
-	arraya.append(grav * sec)
-	arrayb.append(sec)
-	arrayc.append(height - 0.5*sec*sec&grav)
+# ANALITIK
 
-plot.plot(arrayb, arrayc)
-plot.show()
+inp = input("Masukkan ketinggian : ") # ini ketinggian awal 
+yo = float(inp)
+ins = input("Masukkan timestep : ")
+stamp = float(ins)
+g = 9.8                             # ini gravitasi
+arrayv = []
+arrayt = []
+arrayx = []
+
+arrayv1 = []
+arrayt1 = []
+arrayx1 = []
+
+time = math.sqrt(2*yo/g)
+tanalitik = 0
+tnumerik = 0
+
+#ANALITIK
+for sec in numpy.arange(0, time+stamp, stamp):
+    if (yo - g*sec*sec*0.5) >= 0 :
+        tanalitik = sec
+        arrayv.append(g*sec)
+        arrayt.append(sec)
+        arrayx.append(yo - g*sec*sec*0.5)
+        
+
+#NUMERIK
+for sec in numpy.arange(0, time+stamp, stamp):
+    if (yo + (-g*sec)*sec) >= 0 :
+        tnumerik = sec
+        arrayv1.append(g*sec)
+        arrayt1.append(sec)
+        p = 0 - g*sec
+        arrayx1.append(yo + p*sec)
+    
+    
+plot.plot(arrayt, arrayx) #BIRU ANALITIK
+plot.plot(arrayt1, arrayx1) #OREN NUMERIK
+plot.show(plot)  
+print("ANALITIK t(0) =", tanalitik, " sekon")
+print("NUMERIK t(0) =", tnumerik, " sekon")
